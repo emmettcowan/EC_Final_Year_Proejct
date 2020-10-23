@@ -2,9 +2,13 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
+
+.iws
+workspace.xml
+tasks.xml
+.idea/workspace.xml
 
 # Distribution / packaging
 .Python
