@@ -23,4 +23,4 @@ V 0.1  - Getting started
 
 ## Acknowledgments
 
-* [/r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/)
+* [/r/learnpython](https://www.reddit.com/r/learnpython/)
