@@ -6,6 +6,7 @@ __pycache__/
 *.so
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 project files
 
@@ -15,6 +16,8 @@ project files
 # phycharm ignores
 =======
 >>>>>>> url_page_detection
+=======
+>>>>>>> 1f9f4d52b8169a40f195747284977498fada9624
 .iws
 workspace.xml
 tasks.xml
