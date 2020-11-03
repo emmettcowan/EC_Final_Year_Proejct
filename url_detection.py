@@ -17,15 +17,23 @@ def get_chrome_url():
     edit = chromeControl.EditControl()
     return '' + edit.GetValuePattern().Value
 
-active_window = ""
+def url_to_name(url):
+    string_list = url.split('/')
+    return string_list[0]
 
+
+active_window = ""
+window = ""
 
 while True:
     active_window = get_active_window()
+
     if 'Google Chrome' in active_window:
         url = get_chrome_url()
-        print(url)
+        active_window = url;
         time.sleep(1)
-    else:
+
+
+    if window != active_window:
         print(active_window)
-        time.sleep(1)
+        window = active_window

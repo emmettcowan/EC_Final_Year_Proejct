@@ -11,11 +11,11 @@ N/A
 ## Built With
 
 * [pywin32](https://github.com/mhammond/pywin32) - access to windows APIs
-
+* [UIAutomation python](https://github.com/yinkaisheng/Python-UIAutomation-for-Windows) - Pytho  wrapper for UIAutomation API
 
 ## Versioning
 
-V 0.1  - Getting started
+V 0.1  - Basic python funcionlity
 
 ## Authors
 
@@ -24,3 +24,4 @@ V 0.1  - Getting started
 ## Acknowledgments
 
 * [/r/learnpython](https://www.reddit.com/r/learnpython/)
+* [PyWin32 Docs](http://timgolden.me.uk/pywin32-docs/contents.html)
