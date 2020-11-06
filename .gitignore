@@ -5,19 +5,12 @@ __pycache__/
 # C extensions
 *.so
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-project files
-
 #college files ignore
 project files
 
+@AutomationLog.txt
+
 # phycharm ignores
-=======
->>>>>>> url_page_detection
-=======
->>>>>>> 1f9f4d52b8169a40f195747284977498fada9624
 .iws
 workspace.xml
 tasks.xml
