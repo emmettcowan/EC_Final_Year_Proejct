@@ -30,10 +30,11 @@ while True:
 
     if 'Google Chrome' in active_window:
         url = get_chrome_url()
-        active_window = url;
+        active_window = url_to_name(url)
         time.sleep(1)
 
-
-    if window != active_window:
-        print(active_window)
-        window = active_window
+    if active_window != '':
+        if window != active_window:
+            if active_window != '':
+                print(active_window)
+                window = active_window
