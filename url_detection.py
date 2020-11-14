@@ -20,8 +20,8 @@ def get_chrome_url():
 def url_to_name(url):
     string_list = url.split('/')
     return string_list[0]
-
-
+    
+    
 active_window = ""
 window = ""
 
