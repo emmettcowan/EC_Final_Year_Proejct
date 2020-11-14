@@ -1,23 +1,32 @@
+#########################################################
+#   ---              ***MONITOR***                ---   #
+#         *                                  *          #
+#   ---  ***  ---   By Emmett Cowan    ---  ***   ---   #
+#         *                                  *          #
+#   ---                  V0.3                     ---   #
+#########################################################
+
+
 import time
-import win32gui
+import win32gui     
 import uiautomation as auto
 
 
-def get_active_window():
-    active_window_name = None
+def activeWindow():
+    activeWindowName = None
     window = win32gui.GetForegroundWindow()
-    active_window_name = win32gui.GetWindowText(window)
-    return active_window_name
+    activeWindowName = win32gui.GetWindowText(window)
+    return activeWindowName
 
 
-def get_chrome_url():
-    _active_window_name = None
+def chromeUrl():
+    _activeWindowName = None
     window = win32gui.GetForegroundWindow()
     chromeControl = auto.ControlFromHandle(window)
     edit = chromeControl.EditControl()
     return '' + edit.GetValuePattern().Value
 
-def url_to_name(url):
+def urlStrip(url):
     string_list = url.split('/')
     return string_list[0]
     
@@ -26,14 +35,30 @@ active_window = ""
 window = ""
 
 while True:
-    active_window = get_active_window()
+    import json
 
-    if 'Google Chrome' in active_window:
-        url = get_chrome_url()
-        active_window = url_to_name(url)
-        time.sleep(1)
+    x = {
+    "name": "John",
+    "age": 30,
+    "married": True,
+    "divorced": False,
+    "children": ("Ann","Billy"),
+    "pets": None,
+    "cars": [
+        {"model": "BMW 230", "mpg": 27.5},
+        {"model": "Ford Edge", "mpg": 24.1}
+    ]
+    }
 
-    if active_window != '':
+    print(json.dumps(x))
+    
+    active_window = activeWindow()      #get current windows app
+
+    if 'Google Chrome' in active_window:     #get url if in chrome app 
+        url = chromeUrl()
+        active_window = urlStrip(url)
+
+    if active_window != '':                
         if window != active_window:
             if active_window != '':
                 print(active_window)
