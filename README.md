@@ -15,7 +15,8 @@ N/A
 
 ## Versioning
 
-V 0.1  - Basic python funcionlity
+* V 0.1  - Basic python funcionlity
+* V 0.3  - Url/window detection working
 
 ## Authors
 
