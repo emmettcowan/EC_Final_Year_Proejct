@@ -16,7 +16,8 @@ N/A
 ## Versioning
 
 * V 0.1  - Basic python funcionlity
-* V 0.3  - Url/window detection working
+* V 0.3  - Url/window detection working  
+* V 0.4  - Basic JSON logging
 
 ## Authors
 
@@ -24,5 +25,6 @@ N/A
 
 ## Acknowledgments
 
-* [/r/learnpython](https://www.reddit.com/r/learnpython/)
-* [PyWin32 Docs](http://timgolden.me.uk/pywin32-docs/contents.html)
+* [/r/learnpython](https://www.reddit.com/r/learnpython/)  
+* [PyWin32 Docs](http://timgolden.me.uk/pywin32-docs/contents.html)  
+* [UIAutomation](https://github.com/yinkaisheng/Python-UIAutomation-for-Windows)  
