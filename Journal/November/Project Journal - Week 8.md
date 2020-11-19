@@ -15,9 +15,9 @@
 
 ## **reserch**
 
-[Reading large JSON files in Python](https://stackoverflow.com/questions/10382253/reading-rather-large-json-files-in-python)
-[Python JSON lib](https://docs.python.org/3/library/json.html) - used for reading and wirting json
-[python Time lib](https://www.tutorialspoint.com/python/python_date_time.htm) - for getting timestaps & calculating time
+[Reading large JSON files in Python](https://stackoverflow.com/questions/10382253/reading-rather-large-json-files-in-python)  
+[Python JSON lib](https://docs.python.org/3/library/json.html) - used for reading and wirting json  
+[python Time lib](https://www.tutorialspoint.com/python/python_date_time.htm) - for getting timestaps & calculating time  
 
 ## **_Issues:_**
 
