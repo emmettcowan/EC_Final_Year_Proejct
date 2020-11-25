@@ -10,8 +10,8 @@
 -	Record in json format
 
 ## **Reflection**
--	Gained good understading for JSON and how JSON is used in python
--   Could have spend less time stuck on time fetures if i had reserched the lirarys better
+-	Gained good understading for JSON and how JSON is used in python  
+-   Could have spend less time stuck on time fetures if i had reserched the lirarys better  
 
 ## **reserch**
 
