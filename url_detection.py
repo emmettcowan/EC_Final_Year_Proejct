@@ -37,6 +37,7 @@ def urlStrip(url):
     return string_list[0]
     
 
+
 while True:
     
     active_window = activeWindow()      #get current windows app
