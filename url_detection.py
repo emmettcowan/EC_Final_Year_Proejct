@@ -12,11 +12,15 @@ import win32gui
 import uiautomation as auto
 import json
 import datetime as dt
+import pymongo
+
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 
 active_window = ""
 window = ""
 startTime = time.time()
 firstRun = True
+user = ""
 
 def activeWindow():
     activeWindowName = None
@@ -35,11 +39,16 @@ def chromeUrl():
 def urlStrip(url):
     string_list = url.split('/')
     return string_list[0]
-    
 
+def dbPost(activityData):
+    mydb = myclient["Monitor"]
+    mycol = mydb[user]
+    mycol.insert_one(activityData)
+
+user = input("Enter name : " )
+print(user)
 
 while True:
-    
     active_window = activeWindow()      #get current windows app
 
     if 'Google Chrome' in active_window:     #get url if in chrome app 
@@ -54,15 +63,16 @@ while True:
                     endTime = time.time()
                     Timestamp = dt.datetime.fromtimestamp(startTime)
                     TimeSpent = startTime - endTime
-                    data = {'App': window, 'Date & time': str(Timestamp), 'Total time': int(TimeSpent)*-1}
-                    with open('log.json', 'a+') as f:
-                        json.dump(data, f, indent=2)
+                    data = {'user': user, 'App': window, 'Date & time': str(Timestamp), 'Total time': int(TimeSpent)*-1}
+                    dbPost(data)
                     startTime = time.time()
 
                 firstRun = False
                 window = active_window
                 print(window)
                 
+
+        
 
 
                 
