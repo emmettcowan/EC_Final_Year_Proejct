@@ -29,3 +29,4 @@ N/A
 * [/r/learnpython](https://www.reddit.com/r/learnpython/)  
 * [PyWin32 Docs](http://timgolden.me.uk/pywin32-docs/contents.html)  
 * [UIAutomation](https://github.com/yinkaisheng/Python-UIAutomation-for-Windows)  
+* [python gui threading](https://stackoverflow.com/questions/53794930/starting-and-stopping-a-thread-from-a-gui)
