@@ -18,6 +18,7 @@ N/A
 * V 0.1  - Basic python funcionlity
 * V 0.3  - Url/window detection working  
 * V 0.4  - Basic JSON logging
+* V 0.5  - Posting to mongo
 
 ## Authors
 
