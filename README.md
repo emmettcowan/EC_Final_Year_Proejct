@@ -19,6 +19,7 @@ N/A
 * V 0.3  - Url/window detection working  
 * V 0.4  - Basic JSON logging
 * V 0.5  - Posting to mongo
+* V 0.6  - Basic GUI
 
 ## Authors
 
