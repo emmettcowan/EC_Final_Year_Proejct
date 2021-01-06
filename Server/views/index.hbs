@@ -13,11 +13,14 @@
     <section class="get">
         <h3>Geta data base info</h3>
         <div>
-           <form>
+           <form action="/getDb" method="POST">
                <label>Request database info</label>
                <input type='submit' value="request">
            </form>
         </div>
     </section>
+    <div style="background-color: aquamarine;">
+        <p1 id="db">{{ db }}</p1>>
+    </div>
 </body>
 </html>

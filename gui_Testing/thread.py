@@ -24,24 +24,6 @@ class Window(tk.Tk):
 
         self.thread = None
 
-        canvas = tk.Canvas(self, width = 400, height = 300,  relief = 'raised')
-        canvas.pack()
-
-        label1 = tk.Label(self, text='Monitor V0.5')
-        label1.config(font=('helvetica', 14))
-        canvas.create_window(200, 25, window=label1)
-
-        label2 = tk.Label(self, text='Enter Username:')
-        label2.config(font=('helvetica', 10))
-        canvas.create_window(200, 100, window=label2)
-
-        entry1 = tk.Entry (self) 
-        canvas.create_window(200, 140, window=entry1)
-
-        button1 = tk.Button(text='Login', command=self.login, bg='green', fg='white', font=('helvetica', 9, 'bold'))
-        canvas.create_window(200, 180, window=button1)
-
-
         tk.Button(self, text="launch thread", command=self.launch_thread)\
             .grid(row=1, column=0)
         tk.Button(self, text="stop thread", command=self.stop_thread)\
@@ -55,10 +37,6 @@ class Window(tk.Tk):
             self.thread = MyThread()
             self.thread.start()
 
-    def login (self):
-        x1 = self.entry1.get()
-        print(x1)
-        self.main_window()
 
     def stop_thread(self):
         if self.thread:
