@@ -1,17 +1,24 @@
-# EC_Final_Year_Proejct
-FYP 
+# Monitor
+Emmett cowan G00354127 Final year project
 
+<img width="250" height="150" src="./Pictures/gmit.jpg">
+
+## Introduction
 This project is going moniter time spent on applications and websites to record productivie 
 
-## Getting Started
 
-N/A
 
+## Architecture Diagram
+
+<img width="600" height="500" src="./Pictures/arch diagramv3.png">
 
 ## Built With
 
+* [Python 3.7](https://www.python.org/)
 * [pywin32](https://github.com/mhammond/pywin32) - access to windows APIs
 * [UIAutomation python](https://github.com/yinkaisheng/Python-UIAutomation-for-Windows) - Pytho  wrapper for UIAutomation API
+* [NodeJs](https://nodejs.org/en/)
+* [Mongodb](https://www.mongodb.com/3)
 
 ## Versioning
 
@@ -23,7 +30,7 @@ N/A
 
 ## Authors
 
-* **Emmett Cowan** - *Initial work* - [emmettcowan](https://github.com/emmettcowan)
+* **Emmett Cowan** - [emmettcowan](https://github.com/emmettcowan)
 
 ## Acknowledgments
 
