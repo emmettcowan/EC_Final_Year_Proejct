@@ -1,7 +1,7 @@
 # Monitor
 Emmett cowan G00354127 Final year project
 
-<img width="250" height="150" src="./Pictures/gmit.jpg">
+<img width="250" height="150" src="./pictures/gmit.jpg">
 
 ## Introduction
 This project is going moniter time spent on applications and websites to record productivie 
@@ -10,7 +10,7 @@ This project is going moniter time spent on applications and websites to record 
 
 ## Architecture Diagram
 
-<img width="600" height="500" src="./Pictures/arch diagramv3.png">
+<img width="600" height="500" src="./pictures/arch diagramv3.png">
 
 ## Built With
 
