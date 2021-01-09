@@ -27,7 +27,6 @@ class detectionThread(Thread):
     startTime = time.time()
     firstRun = True
     threadRunning = False
-    #global user
 
     def activeWindow(self):
         self.activeWindowName = None
@@ -36,7 +35,6 @@ class detectionThread(Thread):
 
 
     def chromeUrl(self):
-        activeWindowName = None
         window = win32gui.GetForegroundWindow()
         chromeControl = auto.ControlFromHandle(window)
         chromeWindow = chromeControl.EditControl()
@@ -52,7 +50,6 @@ class detectionThread(Thread):
         print(mycol)
         #mycol.insert_one(activityData)
 
-    #user = "andy"#remove when user input name
 
     def run(self):
         self.threadRunning = True
@@ -78,7 +75,7 @@ class detectionThread(Thread):
                         self.firstRun = False
                         self.window = self.active_window
                         print(self.window)
-        print("Monitor stopThreaded")
+        print("Monitor stoped")
 
     def stopThread(self):
         self.threadRunning = False
@@ -101,7 +98,7 @@ def stopThread_thread():
         thread.stopThread()
         thread = None
     else:
-        print("Nothing to stopThread")
+        print("Nothing to stop")
 
 
 def login():
@@ -138,41 +135,6 @@ button3 = tk.Button(window, command=stopThread_thread, text='stop')
 button3.config(font=('helvetica',14))
 canvas.create_window(250,250, window=button3)
 
-
-
 window.mainloop()
-
-        
-# class Window(tk.Tk):
-#     def __init__(self):
-#         tk.Tk.__init__(self)
-#         self.thread = None
-
-#         tk.Label(self, text='Monitor 0.5')\
-#             .grid(row=0, column=0)
-#         tk.Button(self, text="Start", command=self.launch_thread)\
-#             .grid(row=1, column=0)
-#         tk.Button(self, text="stopThread", command=self.stopThread_thread)\
-#             .grid(row=2, column=0)
-
-#     def launch_thread(self):
-#         if self.thread:
-#             print("Monitor already Started")
-#         else:
-#             print("Monitor Started")
-#             self.thread = detectionThread()
-#             self.thread.start()
-
-
-#     def stopThread_thread(self):
-#         if self.thread:
-#             self.thread.stopThread()
-#             self.thread = None
-#         else:
-#             print("Nothing to stopThread")
-
-# if __name__ == '__main__':
-#     win = Window()
-#     win.mainloop()
 
                 
