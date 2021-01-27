@@ -24,3 +24,7 @@
 
 ### **Software:**
 -	add error checking to code
+
+### **Refrence:**
+- Get Active Chrome URL in Python
+- https://stackoverflow.com/questions/59595763/get-active-chrome-url-in-python

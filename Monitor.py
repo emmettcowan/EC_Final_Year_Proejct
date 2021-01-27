@@ -9,7 +9,7 @@
 
 import time                     # timestamps
 import win32gui                 # active window info
-import uiautomation as auto     # url infor
+import uiautomation as auto     # url info
 import json                     # loggin
 import datetime as dt           # timestaps
 import pymongo                  # mongodb
@@ -35,9 +35,9 @@ class detectionThread(Thread):
 
 
     def chromeUrl(self):                            # get url from chrome
-        window = win32gui.GetForegroundWindow()
-        chromeControl = auto.ControlFromHandle(window)
-        chromeWindow = chromeControl.EditControl()
+        window = win32gui.GetForegroundWindow()                 #  Refrence :
+        chromeControl = auto.ControlFromHandle(window)          #  https://stackoverflow.com/questions/59595763/get-active-chrome-url-in-python
+        chromeWindow = chromeControl.EditControl()              #  "Get Active Chrome URL in Python"
         return '' + chromeWindow.GetValuePattern().Value
 
     def urlStrip(self, url):                       # strip url down 
@@ -47,8 +47,8 @@ class detectionThread(Thread):
     def dbPost(self, activityData):             # post  data to mongo
         mydb = self.myclient["Monitor"]
         mycol = mydb[user]
-        print(mycol)                        #swap these comments to post to db or for testing
-        #mycol.insert_one(activityData)
+        #print(mycol)                        #  swap these comments to
+        mycol.insert_one(activityData)       #  post to db or for testing
 
 
     def run(self):                  # thread for main applicaion code
@@ -84,7 +84,7 @@ class detectionThread(Thread):
                 
 #---------------------------------------- GUI CODE --------------------------------------#
  
-def launch_thread():        # gui start thread
+def launchThread():        # gui start thread
     global thread
     if thread:
         print("Monitor already Started")
@@ -94,7 +94,7 @@ def launch_thread():        # gui start thread
         thread.start()
 
 
-def stopThread_thread():       # gui stop thread
+def stopThread():       # gui stop thread
     global thread
     if thread:
         thread.stopThread()
@@ -105,37 +105,38 @@ def stopThread_thread():       # gui stop thread
 
 def login():            # gui login 
     global user
-    x1 = entry1.get()
+    x1 = usernameEntry.get()
     user = x1
     print(x1)
     
 
 window= tk.Tk()         #create tkinr object for gui
+window.title("Moniter")
 
-canvas = tk.Canvas(window, width = 400, height = 300,  relief = 'raised')       # create canvas 
+canvas = tk.Canvas(window, width = 500, height = 300)       # create canvas 
 canvas.pack()                                                                   # set layout and fill widgets
 
-label1 = tk.Label(window, text='Monitor V0.6')
-label1.config(font=('helvetica', 14))
-canvas.create_window(200, 25, window=label1)
+headLable = tk.Label(window, text='Monitor V0.6')
+headLable.config(font=('Arial', 15))
+canvas.create_window(250, 25, window=headLable)
 
-label2 = tk.Label(window, text='Enter Username:')
-label2.config(font=('helvetica', 10))
-canvas.create_window(200, 100, window=label2)
+usernameLable = tk.Label(window, text='Enter Username:')
+usernameLable.config(font=('Arial', 12))
+canvas.create_window(250, 100, window=usernameLable)
 
-entry1 = tk.Entry (window) 
-canvas.create_window(200, 140, window=entry1)
+usernameEntry = tk.Entry (window) 
+canvas.create_window(250, 140, window=usernameEntry)
 
-button1 = tk.Button(text='Login', command=login, bg='green', fg='white', font=('helvetica', 9, 'bold'))
-canvas.create_window(200, 180, window=button1)
+loginButton = tk.Button(text='Login', command=login, bg='black', fg='white', font=('Arial', 12, 'bold'))
+canvas.create_window(250, 180, window=loginButton)
 
-button2 = tk.Button(window, command=launch_thread, text='start')
-button2.config(font=('helvetica',14))
-canvas.create_window(150,250, window=button2)
+startButton = tk.Button(window, command=launchThread, text='start')
+startButton.config(font=('Arial',16))
+canvas.create_window(200,250, window=startButton)
 
-button3 = tk.Button(window, command=stopThread_thread, text='stop')
-button3.config(font=('helvetica',14))
-canvas.create_window(250,250, window=button3)
+stopButton = tk.Button(window, command=stopThread, text='stop')
+stopButton.config(font=('Arial',16))
+canvas.create_window(300,250, window=stopButton)
 
 window.mainloop()
 

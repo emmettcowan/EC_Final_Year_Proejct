@@ -1,7 +1,7 @@
 # Monitor
 Emmett cowan G00354127 Final year project
 
-<img width="250" height="150" src="./pictures/gmit.jpg">
+<img width="350" height="200" src="./pictures/gmit.jpg">
 
 ## Introduction
 This project is going moniter time spent on applications and websites to record productivie 
