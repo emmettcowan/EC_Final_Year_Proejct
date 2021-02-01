@@ -3,26 +3,27 @@
 ----------------------------------------------------------------------
 
 ## **Date**
--	Week 17 (25th dec – 31st jabn)
+-	Week 18 (1st Feb – 7th Feb)
 
 ## **Tasks**
--	reserch login 
--	start login authentication
+-	(cont.)reserch login 
+-	(cont.)start login authentication
 ## **Reflection**
 
 
 ## **reserch**
--	login/register page
+-	encriptption with passport-local-mongoose
 -	authentication
 -	passport.js
 
+[Brillaint article on using passport js](https://www.sitepoint.com/local-authentication-using-passport-node-js/)
 [passport.js](http://www.passportjs.org/docs/)
 
 ## **_Issues:_**
--	took longer then anticipated to reserch passport and impliment this appluicaiton
+-	
 
 ### **Software:**
 
 ## **_Solutions_**
--	devote more time next week to solve this
+-	
 	
