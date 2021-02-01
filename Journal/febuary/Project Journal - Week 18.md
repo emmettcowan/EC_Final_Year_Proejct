@@ -8,6 +8,7 @@
 ## **Tasks**
 -	(cont.)reserch login 
 -	(cont.)start login authentication
+-	start JWT
 ## **Reflection**
 
 
@@ -15,6 +16,7 @@
 -	encriptption with passport-local-mongoose
 -	authentication
 -	passport.js
+-	JWT
 
 [Brillaint article on using passport js](https://www.sitepoint.com/local-authentication-using-passport-node-js/)
 [passport.js](http://www.passportjs.org/docs/)
