@@ -87,8 +87,17 @@ app.post('/login', (req, res, next) => {
     })(req, res, next);
   });
 
+app.post('/register', (req, res, next) => {
+  UserDetails.register({username: req.body.name, active: false}, req.body.password);
+  return res.redirect('/login');
+});
+
 app.get('/login',
   (req, res) => res.render('login')
+);
+
+app.get('/register',
+  (req, res) => res.render('register')
 );
 
 app.get('/',
