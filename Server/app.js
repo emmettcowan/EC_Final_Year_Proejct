@@ -5,14 +5,21 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const connectEnsureLogin = require('connect-ensure-login');
+const path = require('path');
+
+
 var hbs  = require('express-handlebars');
+app.set('view engine', 'hbs');
+app.engine("hbs",hbs({
+    extname: "hbs",
+    defaultLayout: false,
+    layoutsDir: "views/layouts/"
+  })
+);
 
+app.set('views', __dirname + '/views');
 
-
-app.use(express.static(__dirname ));
-
-app.engine('handlebars', hbs());
-app.set('view engine', 'handlebars');
+app.use(express.static(path.join(__dirname, 'public')));
 
 //bodyparser for extracitng infor out of the body of the request
 // express session for saving cookie for user 
@@ -69,24 +76,24 @@ app.post('/login', (req, res, next) => {
           return next(err);
         }
   
-        return res.redirect('/');
+        return res.redirect('/private');
       });
   
     })(req, res, next);
   });
 
 app.get('/login',
-  (req, res) => res.render('index', {name: "john"})
+  (req, res) => res.render('login')
 );
 
 app.get('/',
   connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.sendFile('html/index.hbs', {name: 'john'})
+  (req, res) => res.render('index')
 );
 
 app.get('/private',
   connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.sendFile('html/private.hbs', {root: __dirname})
+  (req, res) => res.render('private')
 );
 
 app.get('/user',
