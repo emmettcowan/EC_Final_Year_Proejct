@@ -27,6 +27,7 @@ This project is going moniter time spent on applications and websites to record 
 * V 0.4  - Basic JSON logging
 * V 0.5  - Posting to mongo
 * V 0.6  - Basic GUI
+* V 0.7  - server running 
 
 ## Authors
 
@@ -38,3 +39,4 @@ This project is going moniter time spent on applications and websites to record 
 * [PyWin32 Docs](http://timgolden.me.uk/pywin32-docs/contents.html)  
 * [UIAutomation](https://github.com/yinkaisheng/Python-UIAutomation-for-Windows)  
 * [python gui threading](https://stackoverflow.com/questions/53794930/starting-and-stopping-a-thread-from-a-gui)
+* [passport js tutorial](https://www.sitepoint.com/local-authentication-using-passport-node-js/)

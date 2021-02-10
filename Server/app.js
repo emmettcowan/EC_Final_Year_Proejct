@@ -1,3 +1,8 @@
+/*
+*     Monitor V0.7
+*     by : Emmett Cowan
+*     FYP
+*/
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -87,7 +92,6 @@ app.get('/login',
 );
 
 app.get('/',
-  connectEnsureLogin.ensureLoggedIn(),
   (req, res) => res.render('index')
 );
 
@@ -96,8 +100,8 @@ app.get('/private',
   (req, res) => res.render('private')
 );
 
-app.get('/user',
-  connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.send({user: req.user})
-);
+// app.get('/user',
+//   connectEnsureLogin.ensureLoggedIn(),
+//   (req, res) => res.send({user: req.user})
+// );
 
