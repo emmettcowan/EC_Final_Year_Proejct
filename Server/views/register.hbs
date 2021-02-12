@@ -3,26 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="icon" href="images/favicon.ico">
+  <title>Register</title>
 </head>
 <body>
-    <h1>Register Page</h1>
+    <div class="header">
+        <h1>Welcome To Monitor</h1>
+        <p>A time management system</p>
+    </div>
     <div>
-        <form action="/register" method="POST">
+        <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="news.asp">About</a></li>
+        <li><a href="contact.asp">Contact</a></li>
+        <li><a href="register">Register</a></li>
+        <li><a href="login">Login</a></li>
+        </ul>
+    </div>
     <div>
-        <label for="name">Name</label>
+        <form id="logForm" action="/register" method="POST">
+    <div>
+        <h3>Register</h3>
+        <label id="Uname" for="name">Name</label>
         <input type="text" id="name" name="name" required>
     </div>
     <div>
-        <label for="password">Password</label>
+        <label id="Pass" for="password">Password</label>
         <input type="password" id="password" name="password" required>
     </div>
-        <button type="submit">Register</button>
+        <button id="login" type="submit">Register</button>
         </form>
         
     </div>
-    <a href='/'>Home page</a>
-    <div class="devider"></div>
-    <a href="/login">Login</a>
 </body>
 </html>
