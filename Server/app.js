@@ -47,7 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //connect to user db and setup schema
-mongoose.connect('mongodb://localhost/MyDatabase',
+mongoose.connect('mongodb://localhost/users',
   { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Schema = mongoose.Schema;
@@ -81,11 +81,16 @@ app.post('/login', (req, res, next) => {
           return next(err);
         }
   
-        return res.redirect('/private');
+        return res.redirect('/dashboard');
       });
   
     })(req, res, next);
-  });
+});
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 app.post('/register', (req, res, next) => {
   UserDetails.register({username: req.body.name, active: false}, req.body.password);
@@ -100,13 +105,25 @@ app.get('/register',
   (req, res) => res.render('register')
 );
 
+app.get("/about",
+(req, res) => res.render('about'))
+
 app.get('/',
   (req, res) => res.render('index')
 );
 
+app.get('/contact',
+  (req, res) => res.render('contact')
+);
+
+app.get('/dashboard',
+  connectEnsureLogin.ensureLoggedIn(),
+  (req, res) => res.render('dashboard', { name : req.user.username})
+);
+
 app.get('/private',
   connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.render('private')
+  (req, res) => res.render('private', { name : req.user.username})
 );
 
 // app.get('/user',

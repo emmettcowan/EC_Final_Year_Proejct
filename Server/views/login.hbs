@@ -9,17 +9,18 @@
 
 <body class="mainBody">
   <div class="header">
-    <h1>Welcome To Monitor</h1>
-    <p>A time management system</p>
+      <h1>Welcome To Monitor</h1>
+      <p>A time management system</p>
   </div>
   <div>
-    <ul>
+      <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="news.asp">About</a></li>
-      <li><a href="contact.asp">Contact</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="dashboard">User Page</a></li>
       <li><a href="register">Register</a></li>
       <li><a href="login">Login</a></li>
-    </ul>
+      </ul>
   </div>
   <form id="logForm" action="/login" method="post">
     <div>
@@ -35,7 +36,7 @@
       <input type="password" name="password" id="Pass" required />
     </div>
     <div class="field">
-      <input id="login" type="submit" value="Login." required />
+      <input class="button" type="submit" value="Login." required />
     </div>
     <label id="error-message"></label>
   </form>
