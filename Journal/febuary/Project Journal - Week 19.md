@@ -10,6 +10,7 @@
 -	Handlebars js
 ## **Reflection**
 
+- made great progress with webserver setting up pages and completing the login/registration authentication
 
 ## **reserch**
 -	routes
