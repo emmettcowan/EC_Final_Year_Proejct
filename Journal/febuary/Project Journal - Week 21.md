@@ -3,18 +3,18 @@
 ----------------------------------------------------------------------
 
 ## **Date**
--	Week 20 (15th Feb – 21st Feb)
+-	Week 21 (22nd Feb – 28th Feb)
 
 ## **Tasks**
--   Start reserching Chart js
--   Start brinign user data from mongo into web server for user dashboard
+-   continue adding userdata for display on dasdhboard
+-   update and layout userpage
 
 ## **Reflection**
--   good learning of topics ( chat js and mongodb queery)
 
 ## **reserch**
 -   Chart Js
 -   MongoDB
+-   Bootstrap
 
 ## **_Issues:_**
 -	
