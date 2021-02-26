@@ -11,6 +11,8 @@
 -	start JWT
 ## **Reflection**
 
+## **Timeline**
+<img width="600" height="500" src="../pictures/26.2.21.png">
 
 ## **reserch**
 -	encriptption with passport-local-mongoose
