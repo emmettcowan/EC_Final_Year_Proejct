@@ -19,7 +19,7 @@
 
 ## **Timeline**
 
-<img width="600" height="500" src="./pictures/10.2.21timeline.PNG">
+<img width="600" height="500" src="10.2.21timeline.PNG">
 
 
 ## **_Issues:_**
