@@ -14,11 +14,7 @@
 -   learned alot about how bootstrap works and how to implemnt it in a proejct
 
 ## **Timeline**
-<<<<<<< HEAD
 <img width="1200" height="400" src="26.2.21.png">
-=======
-<img width="1200" height="500" src="26.2.21.png">
->>>>>>> e576e126c63c916a4d212ec8b0c058267965ef75
 
 ## **reserch**
 -   Chart Js
