@@ -15,6 +15,8 @@ import datetime as dt           # timestaps
 import pymongo                  # mongodb
 from threading import Thread    # gui threading
 import tkinter as tk            # gui
+from urlDetection import Url    # get url from chrome window        
+import pythoncom                # initizlise com ports on threads
 
 
 user = ""
@@ -33,13 +35,6 @@ class detectionThread(Thread):
         self.activeWindowName = win32gui.GetWindowText(win32gui.GetForegroundWindow())
         return self.activeWindowName
 
-
-    def chromeUrl(self):                            # get url from chrome
-        window = win32gui.GetForegroundWindow()                 #  Refrence :
-        chromeControl = auto.ControlFromHandle(window)          #  https://stackoverflow.com/questions/59595763/get-active-chrome-url-in-python
-        chromeWindow = chromeControl.EditControl()              #  "Get Active Chrome URL in Python"
-        return '' + chromeWindow.GetValuePattern().Value
-
     def urlStrip(self, url):                       # strip url down 
         string_list = url.split('/')
         return string_list[0]
@@ -47,8 +42,8 @@ class detectionThread(Thread):
     def dbPost(self, activityData):             # post  data to mongo
         mydb = self.myclient["Monitor"]
         mycol = mydb[user]
-        #print(mycol)                        #  swap these comments to
-        mycol.insert_one(activityData)       #  post to db or for testing
+        print(mycol)                        #  swap these comments to
+        #mycol.insert_one(activityData)       #  post to db or for testing
 
 
     def run(self):                  # thread for main applicaion code
@@ -57,9 +52,11 @@ class detectionThread(Thread):
         while self.threadRunning:
             self.active_window = self.activeWindow()      #get current windows app
 
-            # if 'Google Chrome' in self.active_window:     #get url if in chrome app 
-            #     url = self.chromeUrl()                       #problem with threading
-            #     self.active_window = self.urlStrip(url)
+            if 'Google Chrome' in self.active_window:     #get url if in chrome app 
+                pythoncom.CoInitialize ()
+                u = Url()                       
+                urlpre = u.chromeUrl()
+                self.active_window = self.urlStrip(urlpre)
 
             if self.active_window != '':                    #  checking & removing
                 if self.window != self.active_window:       #  empty 
