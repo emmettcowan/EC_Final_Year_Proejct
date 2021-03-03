@@ -10,13 +10,13 @@
 import time                     # timestamps
 import win32gui                 # active window info
 import uiautomation as auto     # url info
-import json                     # loggin
 import datetime as dt           # timestaps
 import pymongo                  # mongodb
 from threading import Thread    # gui threading
 import tkinter as tk            # gui
 from urlDetection import Url    # get url from chrome window        
 import pythoncom                # initizlise com ports on threads
+import hashlib                  # login verification encryption
 
 
 user = ""
@@ -42,18 +42,18 @@ class detectionThread(Thread):
     def dbPost(self, activityData):             # post  data to mongo
         mydb = self.myclient["Monitor"]
         mycol = mydb[user]
-        print(mycol)                        #  swap these comments to
+        print(activityData)                        #  swap these comments to
         #mycol.insert_one(activityData)       #  post to db or for testing
 
 
     def run(self):                  # thread for main applicaion code
         self.threadRunning = True
-
+        self.startTime = time.time()
         while self.threadRunning:
             self.active_window = self.activeWindow()      #get current windows app
 
             if 'Google Chrome' in self.active_window:     #get url if in chrome app 
-                pythoncom.CoInitialize ()
+                pythoncom.CoInitialize ()                   # initizlie Com ports on thread 
                 u = Url()                       
                 urlpre = u.chromeUrl()
                 self.active_window = self.urlStrip(urlpre)
@@ -72,7 +72,7 @@ class detectionThread(Thread):
 
                         self.firstRun = False
                         self.window = self.active_window
-                        print(self.window)
+                        print(self.window) # for testing in developemtn
         print("Monitor stoped")
 
     def stopThread(self):
@@ -99,41 +99,80 @@ def stopThread():       # gui stop thread
     else:
         print("Nothing to stop")
 
+def verifiyPass(password, hash, salt):      #  verifiy the inputed password with the Hashed value 
+    dbPass = hashlib.pbkdf2_hmac('sha256', bytes(password, encoding='utf-8'), bytes(salt, encoding='utf-8'), 25000, dklen=512)
+    if(dbPass.hex() == hash):
+        return True
+    else:
+        return False
+
+
 
 def login():            # gui login 
+    #connect to the user DB
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["users"]
+    mycol = mydb["userInfo"]
+    #set up variables
     global user
-    x1 = usernameEntry.get()
-    user = x1
-    print(x1)
-    
+    userObj = ""
+    user = usernameEntry.get()
+    password = passEntry.get()
+    salt = ""
+    #queery the DB and find the user
+    query = {"username": user}    
+    for x in mycol.find(query):
+        userObj = x
+    #error check
+    if(userObj == ""):
+        loginLable['text'] = 'User Not found'
+    else:
+        salt = userObj['salt']
+        hash = userObj['hash']
+        if(verifiyPass(password, hash, salt)):
+            loginLable['text'] = 'Login Success'
+            # show the buttons once the login is successful
+            startButton = tk.Button(window, command=launchThread, text='start')
+            startButton.config(font=('Arial',16))
+            canvas.create_window(200,300, window=startButton)
+
+            stopButton = tk.Button(window, command=stopThread, text='stop')
+            stopButton.config(font=('Arial',16))
+            canvas.create_window(300,300, window=stopButton)
+        else:
+            loginLable['text'] = 'Login Failed'
+            print(user)
 
 window= tk.Tk()         #create tkinr object for gui
 window.title("Moniter")
 
-canvas = tk.Canvas(window, width = 500, height = 300)       # create canvas 
+canvas = tk.Canvas(window, width = 500, height = 350)       # create canvas 
 canvas.pack()                                                                   # set layout and fill widgets
 
-headLable = tk.Label(window, text='Monitor V0.6')
+headLable = tk.Label(window, text='Monitor V0.7')
 headLable.config(font=('Arial', 15))
 canvas.create_window(250, 25, window=headLable)
 
 usernameLable = tk.Label(window, text='Enter Username:')
 usernameLable.config(font=('Arial', 12))
-canvas.create_window(250, 100, window=usernameLable)
+canvas.create_window(150, 100, window=usernameLable)
 
 usernameEntry = tk.Entry (window) 
-canvas.create_window(250, 140, window=usernameEntry)
+canvas.create_window(300, 100, window=usernameEntry)
+
+passLable = tk.Label(window, text='Enter password:')
+passLable.config(font=('Arial', 12))
+canvas.create_window(150, 150, window=passLable)
+
+passEntry = tk.Entry (window) 
+canvas.create_window(300, 150, window=passEntry)
 
 loginButton = tk.Button(text='Login', command=login, bg='black', fg='white', font=('Arial', 12, 'bold'))
-canvas.create_window(250, 180, window=loginButton)
+canvas.create_window(250, 200, window=loginButton)
 
-startButton = tk.Button(window, command=launchThread, text='start')
-startButton.config(font=('Arial',16))
-canvas.create_window(200,250, window=startButton)
-
-stopButton = tk.Button(window, command=stopThread, text='stop')
-stopButton.config(font=('Arial',16))
-canvas.create_window(300,250, window=stopButton)
+loginLable = tk.Label(window, text='')
+loginLable.config(font=('Arial', 12))
+canvas.create_window(150, 225, window=loginLable)
 
 window.mainloop()
 

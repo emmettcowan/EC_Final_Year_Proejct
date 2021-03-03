@@ -1,9 +1,17 @@
+#########################################################
+#   ---              ***MONITOR***                ---   #
+#         *                                  *          #
+#   ---  ***  ---   By Emmett Cowan    ---  ***   ---   #
+#         *                                  *          #
+#   ---                  V0.7                     ---   #
+#########################################################
+
+
 # This python script returns the url from chrome when it is the slected forground window
 
 import uiautomation as auto     # url info
 import win32gui                 # active window info
 import time
-
 
 
 class Url():
