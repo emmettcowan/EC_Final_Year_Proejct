@@ -42,8 +42,8 @@ class detectionThread(Thread):
     def dbPost(self, activityData):             # post  data to mongo
         mydb = self.myclient["Monitor"]
         mycol = mydb[user]
-        print(activityData)                        #  swap these comments to
-        #mycol.insert_one(activityData)       #  post to db or for testing
+        #print(activityData)                        #  swap these comments to
+        mycol.insert_one(activityData)       #  post to db or for testing
 
 
     def run(self):                  # thread for main applicaion code
@@ -54,8 +54,8 @@ class detectionThread(Thread):
 
             if 'Google Chrome' in self.active_window:     #get url if in chrome app 
                 pythoncom.CoInitialize ()                   # initizlie Com ports on thread 
-                u = Url()                       
-                urlpre = u.chromeUrl()
+                urlDetector = Url()                       
+                urlpre = urlDetector.chromeUrl()
                 self.active_window = self.urlStrip(urlpre)
 
             if self.active_window != '':                    #  checking & removing
@@ -132,47 +132,46 @@ def login():            # gui login
         if(verifiyPass(password, hash, salt)):
             loginLable['text'] = 'Login Success'
             # show the buttons once the login is successful
-            startButton = tk.Button(window, command=launchThread, text='start')
+            startButton = tk.Button(window, command=launchThread, bg='SpringGreen3', fg='white', text='start')
             startButton.config(font=('Arial',16))
             canvas.create_window(200,300, window=startButton)
 
-            stopButton = tk.Button(window, command=stopThread, text='stop')
+            stopButton = tk.Button(window, command=stopThread, bg='Firebrick1', fg='white', text='stop')
             stopButton.config(font=('Arial',16))
             canvas.create_window(300,300, window=stopButton)
         else:
             loginLable['text'] = 'Login Failed'
-            print(user)
 
 window= tk.Tk()         #create tkinr object for gui
 window.title("Moniter")
 
-canvas = tk.Canvas(window, width = 500, height = 350)       # create canvas 
+canvas = tk.Canvas(window, width = 500, height = 350, bg = "RoyalBlue1")       # create canvas 
 canvas.pack()                                                                   # set layout and fill widgets
 
-headLable = tk.Label(window, text='Monitor V0.7')
-headLable.config(font=('Arial', 15))
+headLable = tk.Label(window, text='Monitor V0.7',  bg = "RoyalBlue1")
+headLable.config(font=('Arial', 20))
 canvas.create_window(250, 25, window=headLable)
 
-usernameLable = tk.Label(window, text='Enter Username:')
+usernameLable = tk.Label(window, text='Enter Username:',  bg = "RoyalBlue1")
 usernameLable.config(font=('Arial', 12))
 canvas.create_window(150, 100, window=usernameLable)
 
 usernameEntry = tk.Entry (window) 
 canvas.create_window(300, 100, window=usernameEntry)
 
-passLable = tk.Label(window, text='Enter password:')
+passLable = tk.Label(window, text='Enter password:',  bg = "RoyalBlue1")
 passLable.config(font=('Arial', 12))
 canvas.create_window(150, 150, window=passLable)
 
 passEntry = tk.Entry (window) 
 canvas.create_window(300, 150, window=passEntry)
 
-loginButton = tk.Button(text='Login', command=login, bg='black', fg='white', font=('Arial', 12, 'bold'))
+loginButton = tk.Button(text='Login', command=login, width=15, bg='ghost white', fg='Black', font=('Arial', 12, 'bold'))
 canvas.create_window(250, 200, window=loginButton)
 
-loginLable = tk.Label(window, text='')
+loginLable = tk.Label(window, text='',  bg = "RoyalBlue1")
 loginLable.config(font=('Arial', 12))
-canvas.create_window(150, 225, window=loginLable)
+canvas.create_window(150, 250, window=loginLable)
 
 window.mainloop()
 

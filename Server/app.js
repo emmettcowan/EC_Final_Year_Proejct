@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const connectEnsureLogin = require('connect-ensure-login');
 const path = require('path');
+var data;
 
 
 var hbs  = require('express-handlebars');
@@ -80,7 +81,22 @@ app.post('/login', (req, res, next) => {
         if (err) {
           return next(err);
         }
-  
+
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://localhost:27017/";
+
+
+        MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("Monitor");
+        dbo.collection(req.user.username).find({}).toArray(function(err, result) {
+            if (err) throw err;
+            data = JSON.stringify(result);
+            //console.log(result);
+            db.close();
+            });
+        });
+
         return res.redirect('/dashboard');
       });
   
@@ -120,7 +136,7 @@ app.get('/contact',
 
 app.get('/dashboard',
   connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.render('dashboard', { name : req.user.username})
+  (req, res) => res.render('dashboard', { name : req.user.username, data: data})
 );
 
 app.get('/private',

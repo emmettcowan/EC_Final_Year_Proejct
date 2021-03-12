@@ -19,6 +19,7 @@ This project is going moniter time spent on applications and websites to record 
 * [UIAutomation python](https://github.com/yinkaisheng/Python-UIAutomation-for-Windows) - Pytho  wrapper for UIAutomation API
 * [NodeJs](https://nodejs.org/en/)
 * [Mongodb](https://www.mongodb.com/3)
+* [Bootstrap](https://getbootstrap.com/)
 
 ## Versioning
 
@@ -40,3 +41,5 @@ This project is going moniter time spent on applications and websites to record 
 * [UIAutomation](https://github.com/yinkaisheng/Python-UIAutomation-for-Windows)  
 * [python gui threading](https://stackoverflow.com/questions/53794930/starting-and-stopping-a-thread-from-a-gui)
 * [passport js tutorial](https://www.sitepoint.com/local-authentication-using-passport-node-js/)
+* [Python Hash encryption Library](https://docs.python.org/3/library/hashlib.html)
+- [Passport local mongoose](https://www.npmjs.com/package/passport-local-mongoose)
