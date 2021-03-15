@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const connectEnsureLogin = require('connect-ensure-login');
 const path = require('path');
-var data;
+var chartData = [];
 
 
 var hbs  = require('express-handlebars');
@@ -91,8 +91,9 @@ app.post('/login', (req, res, next) => {
         var dbo = db.db("Monitor");
         dbo.collection(req.user.username).find({}).toArray(function(err, result) {
             if (err) throw err;
-            data = JSON.stringify(result);
-            //console.log(result);
+            
+            chartData = JSON.parse(result);
+            console.log(chartData);
             db.close();
             });
         });
@@ -136,7 +137,7 @@ app.get('/contact',
 
 app.get('/dashboard',
   connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.render('dashboard', { name : req.user.username, data: data})
+  (req, res) => res.render('dashboard', { name: req.user.username, chartData: chartData})
 );
 
 app.get('/private',
