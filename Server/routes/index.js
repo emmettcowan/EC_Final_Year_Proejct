@@ -45,34 +45,30 @@ router.post('/login', (req, res, next) => {
                     return next(err);
                 }
 
-                var MongoClient = require('mongodb').MongoClient;
-                var url = "mongodb://localhost:27017/";
-
-
-                MongoClient.connect(url, function (err, db) {
-                    if (err) throw err;
-                    var dbo = db.db("Monitor");
-                    dbo.collection(req.user.username).find({}).toArray(function (err, result) {
-                        if (err) throw err;
-                        console.log(result);
-                        // for (i = 0; i < result.length; i++) {
-                        //     headingData.push(result[i].App);
-                        //     chartData.push(result[i].Total_time);
-                        // }
-                        // console.log(headingData);
-                        // console.log(chartData);
-                        chartData = JSON.stringify(result);
-                        db.close();
-                    });
-                });
-
                 return res.redirect('/dashboard');
             });
 
         })(req, res, next);
 });
 
+router.get('/userData',
+    connectEnsureLogin.ensureLoggedIn(),
+    function(req, res) {
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/";
 
+
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("Monitor");
+        dbo.collection(req.user.username).find({}).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            res.send(result);
+        });
+    });
+    
+});
 
 router.get('/logout', function (req, res) {
     req.logout();
