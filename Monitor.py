@@ -66,7 +66,7 @@ class detectionThread(Thread):
                             endTime = time.time()
                             Timestamp = dt.datetime.fromtimestamp(self.startTime)
                             TimeSpent = self.startTime - endTime
-                            data = {'user': user, 'App': self.window, 'Date & time': str(Timestamp), 'Total time': int(TimeSpent)*-1}
+                            data = {'user': user, 'App': self.window, 'Date_time': str(Timestamp), 'Total_time': int(TimeSpent)*-1}
                             self.dbPost(data)
                             self.startTime = time.time()
 

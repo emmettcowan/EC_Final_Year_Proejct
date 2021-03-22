@@ -5,7 +5,8 @@ const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const connectEnsureLogin = require('connect-ensure-login');
 
-
+var chartData =[];
+var headingData = [];
 
 //connect to user db and setup schema
 mongoose.connect('mongodb://localhost/users',
@@ -54,6 +55,13 @@ router.post('/login', (req, res, next) => {
                     dbo.collection(req.user.username).find({}).toArray(function (err, result) {
                         if (err) throw err;
                         console.log(result);
+                        // for (i = 0; i < result.length; i++) {
+                        //     headingData.push(result[i].App);
+                        //     chartData.push(result[i].Total_time);
+                        // }
+                        // console.log(headingData);
+                        // console.log(chartData);
+                        chartData = JSON.stringify(result);
                         db.close();
                     });
                 });
@@ -98,7 +106,7 @@ router.get('/contact',
 
 router.get('/dashboard',
     connectEnsureLogin.ensureLoggedIn(),
-    (req, res) => res.render('dashboard', { name: req.user.username, chartData: [12,4,5,23,6,7] })
+    (req, res) => res.render('dashboard', { name: req.user.username, chartData: chartData, headingData: headingData })
 );
 
 router.get('/private',
