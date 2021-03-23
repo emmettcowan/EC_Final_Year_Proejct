@@ -14,8 +14,17 @@ fetch('/userData')
             response.json().then(function (data) {
                 console.log(data[1].App);
                 data.forEach(entry => {
-                    headings.push(entry.App);
-                    chartData.push(entry.Total_time); 
+                    if (headings.includes(entry.App)) {
+                        for (let index = 0; index < headings.length; index++) {
+                            if(headings[index] == entry.App){
+                                chartData[index] = chartData[index] + entry.Total_time;
+                            }
+                        }
+                    }
+                    else{
+                        headings.push(entry.App);
+                        chartData.push(entry.Total_time);
+                    }
                 });
                 console.log(headings);
                 console.log(chartData);
