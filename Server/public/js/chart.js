@@ -1,11 +1,10 @@
 
 var userData = [];
+var formateData = [];
+
 var Today = new Date();
 var startTime = 0;
 var endTime = Today.getTime();
-var formateData = [];
-
-
 //set date inputs max to todays date
 var dd = Today.getDate() + 1;
 var mm = Today.getMonth() + 1; //January is 0!
@@ -44,8 +43,9 @@ endInput.addEventListener('change', (event) => {
         }
     });
     console.log(formateData);
-    BarChart(formateData);
+    Chartdata(formateData);
 });
+
 
 
 fetch('/userData')
@@ -59,7 +59,7 @@ fetch('/userData')
             response.json().then(function (data) {
                 userData = data;
                 formateData = data;
-                BarChart(formateData);
+                Chartdata(formateData);
             });
         }
     )
@@ -96,7 +96,7 @@ function interpolateColors(dataLength, colorScale, colorRangeInfo) {
 }
 
 
-function BarChart(data) {
+function Chartdata(data) {
     var headings = [];
     var values = [];
     data.forEach(entry => {
@@ -116,6 +116,7 @@ function BarChart(data) {
         labels: headings,
         data: values,
     };
+    const dataLength = chartData.data.length;
 
     const colorScale = d3.interpolateCool;
 
@@ -125,19 +126,24 @@ function BarChart(data) {
         useEndAsStart: true,
     };
 
-    const dataLength = chartData.data.length;
     /* Create color array */
     var COLORS = interpolateColors(dataLength, colorScale, colorRangeInfo);
-    console.log(dataLength);
-    new Chart(document.getElementById("myChart"), {
+
+    createChart(chartData, COLORS);
+}
+
+
+function createChart( data, colors) {
+    myChart = document.getElementById("bar").getContext("2d");
+    myChart = new Chart(myChart, {
         type: 'horizontalBar',
         data: {
-            labels: chartData.labels,
+            labels: data.labels,
             datasets: [
                 {
                     label: "Time (Seconds)",
-                    backgroundColor: COLORS,
-                    data: chartData.data
+                    backgroundColor: colors,
+                    data: data.data
                 }
             ]
         },
@@ -150,9 +156,28 @@ function BarChart(data) {
         }
     });
 
-    return myChart;
+    myChart = document.getElementById("pie").getContext("2d");
+    myChart = new Chart(myChart, {
+        type: 'pie',
+        data: {
+            labels: data.labels,
+            datasets: [
+                {
+                    label: "Time (Seconds)",
+                    backgroundColor: colors,
+                    data: data.data
+                }
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Time spent on diffrent applications (Seconds)'
+            }
+        }
+    });
 }
-
 
 
 
