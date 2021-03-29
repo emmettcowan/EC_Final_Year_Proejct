@@ -48,7 +48,6 @@ endInput.addEventListener('change', (event) => {
 });
 
 
-
 fetch('/userData')
     .then(
         function (response) {
@@ -60,7 +59,6 @@ fetch('/userData')
             response.json().then(function (data) {
                 userData = data;
                 formateData = data;
-                //console.log(formateData);
                 BarChart(formateData);
             });
         }
@@ -69,24 +67,77 @@ fetch('/userData')
         console.log('Fetch Error :-S', err);
     });
 
+/*
+*   Code for dynamicly chaning colors is from the following article
+*   https://codenebula.io/javascript/frontend/dataviz/2019/04/18/automatically-generate-chart-colors-with-chart-js-d3s-color-scales/
+*   uses D3 interpolation
+*/
+function calculatePoint(i, intervalSize, colorRangeInfo) {
+    var { colorStart, colorEnd, useEndAsStart } = colorRangeInfo;
+    return (useEndAsStart
+        ? (colorEnd - (i * intervalSize))
+        : (colorStart + (i * intervalSize)));
+}
+
+
+function interpolateColors(dataLength, colorScale, colorRangeInfo) {
+    var { colorStart, colorEnd } = colorRangeInfo;
+    var colorRange = colorEnd - colorStart;
+    var intervalSize = colorRange / dataLength;
+    var i, colorPoint;
+    var colorArray = [];
+
+    for (i = 0; i < dataLength; i++) {
+        colorPoint = calculatePoint(i, intervalSize, colorRangeInfo);
+        colorArray.push(colorScale(colorPoint));
+    }
+
+    return colorArray;
+}
+
 
 function BarChart(data) {
     var headings = [];
-    var chartData = [];
+    var values = [];
     data.forEach(entry => {
+        if (headings.includes(entry.App)) {
+        for (let index = 0; index < headings.length; index++) {
+            if (headings[index] == entry.App) {
+                values[index] = values[index] + entry.Total_time;
+            }
+        }
+    }
+    else {
         headings.push(entry.App);
-        chartData.push(entry.Total_time);
+            values.push(entry.Total_time);
+    }
     });
-    console.log(data);
+    const chartData = {
+        labels: headings,
+        data: values,
+    };
+
+    const colorScale = d3.interpolateCool;
+
+    const colorRangeInfo = {
+        colorStart: 0,
+        colorEnd: 0.65,
+        useEndAsStart: true,
+    };
+
+    const dataLength = chartData.data.length;
+    /* Create color array */
+    var COLORS = interpolateColors(dataLength, colorScale, colorRangeInfo);
+    console.log(dataLength);
     new Chart(document.getElementById("myChart"), {
         type: 'horizontalBar',
         data: {
-            labels: headings,
+            labels: chartData.labels,
             datasets: [
                 {
-                    label: "Population (millions)",
-                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                    data: chartData
+                    label: "Time (Seconds)",
+                    backgroundColor: COLORS,
+                    data: chartData.data
                 }
             ]
         },
@@ -94,10 +145,12 @@ function BarChart(data) {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Predicted world population (millions) in 2050'
+                text: 'Time spent on diffrent applications (Seconds)'
             }
         }
     });
+
+    return myChart;
 }
 
 

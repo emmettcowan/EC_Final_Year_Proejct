@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
 ## **Date**
--	Week 23 (8th Feb – 14th Feb)
+-	Week 23 (8th Feb – 14th march)
 
 ## **Tasks**
 -   update python gui
