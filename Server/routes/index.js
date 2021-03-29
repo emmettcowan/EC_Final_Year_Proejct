@@ -102,7 +102,7 @@ router.get('/contact',
 
 router.get('/dashboard',
     connectEnsureLogin.ensureLoggedIn(),
-    (req, res) => res.render('dashboard', { name: req.user.username, chartData: chartData, headingData: headingData })
+    (req, res) => res.render('dashboard', { name: req.user.username })
 );
 
 router.get('/private',

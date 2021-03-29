@@ -74,8 +74,15 @@
 
     <section class="container-fluid dash">
         <h1>Welcome {{name}}</h1>
+
+        <label for="start">Start date:</label>
+        <input type="date" id="start" name="trip-start" value="2021-03-28" min="2018-01-01" max="2018-12-31">
+
+        <label for="start">End date:</label>
+        <input type="date" id="end" name="trip-End" value="2021-03-28" min="2018-01-01" max="2018-12-31">
+
         <div class="chart">
-            <canvas id="myChart" width=50% height=50%></canvas>
+            <canvas id="myChart" width=80% height=80%></canvas>
         </div>
     </section>
     

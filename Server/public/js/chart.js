@@ -1,5 +1,53 @@
-var headings = []
-var chartData = []
+
+var userData = [];
+var Today = new Date();
+var startTime = 0;
+var endTime = Today.getTime();
+var formateData = [];
+
+
+//set date inputs max to todays date
+var dd = Today.getDate() + 1;
+var mm = Today.getMonth() + 1; //January is 0!
+var yyyy = Today.getFullYear();
+if (dd < 10) {
+    dd = '0' + dd
+}
+if (mm < 10) {
+    mm = '0' + mm
+}
+Today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("start").setAttribute("max", Today);
+document.getElementById("end").setAttribute("max", Today);
+
+
+
+//get date from inputs on change event
+//start date change
+const startInput = document.getElementById('start');
+
+startInput.addEventListener('change', (event) => {
+    var selectedDate = event.target.value;
+    startTime = new Date(selectedDate).getTime() / 1000;
+});
+
+//end date change
+const endInput = document.getElementById('end');
+
+endInput.addEventListener('change', (event) => {
+    var selectedDate = event.target.value;
+    endTime = new Date(selectedDate).getTime() / 1000;
+    formateData = [];
+    userData.forEach(element => {
+        if(element['Start_time'] > startTime && element['End_Time'] < endTime){
+            formateData.push(element);
+        }
+    });
+    console.log(formateData);
+    BarChart(formateData);
+});
+
+
 
 fetch('/userData')
     .then(
@@ -9,25 +57,11 @@ fetch('/userData')
                     response.status);
                 return;
             }
-
-            // Examine the text in the response
             response.json().then(function (data) {
-                console.log(data[1].App);
-                data.forEach(entry => {
-                    if (headings.includes(entry.App)) {
-                        for (let index = 0; index < headings.length; index++) {
-                            if(headings[index] == entry.App){
-                                chartData[index] = chartData[index] + entry.Total_time;
-                            }
-                        }
-                    }
-                    else{
-                        headings.push(entry.App);
-                        chartData.push(entry.Total_time);
-                    }
-                });
-                console.log(headings);
-                console.log(chartData);
+                userData = data;
+                formateData = data;
+                //console.log(formateData);
+                BarChart(formateData);
             });
         }
     )
@@ -36,41 +70,38 @@ fetch('/userData')
     });
 
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'horizontalBar',
-    data: {
-        labels: headings,
-        datasets: [{
-            label: 'Time in seconds',
-            data: chartData,
-            backgroundColor: [
-                'rgba(255, 99, 132)',
-                'rgba(54, 162, 235)',
-                'rgba(255, 206, 86)',
-                'rgba(75, 192, 192)',
-                'rgba(153,102, 255)',
-                'rgba(255, 159, 64)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
+function BarChart(data) {
+    var headings = [];
+    var chartData = [];
+    data.forEach(entry => {
+        headings.push(entry.App);
+        chartData.push(entry.Total_time);
+    });
+    console.log(data);
+    new Chart(document.getElementById("myChart"), {
+        type: 'horizontalBar',
+        data: {
+            labels: headings,
+            datasets: [
+                {
+                    label: "Population (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                    data: chartData
                 }
-            }]
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Predicted world population (millions) in 2050'
+            }
         }
-    }
-});
+    });
+}
+
+
+
+
+
 

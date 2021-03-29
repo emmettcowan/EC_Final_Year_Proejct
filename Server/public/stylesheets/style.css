@@ -142,11 +142,12 @@ h3{
 /* dashboard  */
 
 .chart{
-    width: 30%;
+    width: 60%;
 }
 
 .dash{
     color: #1E1B18;
+    background-color: #f5f5f5;
 }
 
 
