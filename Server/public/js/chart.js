@@ -152,6 +152,13 @@ function createChart( data, colors) {
             title: {
                 display: true,
                 text: 'Time spent on diffrent applications (Seconds)'
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
         }
     });
