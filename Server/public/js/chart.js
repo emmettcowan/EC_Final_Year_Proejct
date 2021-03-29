@@ -112,10 +112,11 @@ function Chartdata(data) {
             values.push(entry.Total_time);
     }
     });
-    const chartData = {
+    var chartData = {
         labels: headings,
         data: values,
     };
+
     const dataLength = chartData.data.length;
 
     const colorScale = d3.interpolateCool;
@@ -128,7 +129,7 @@ function Chartdata(data) {
 
     /* Create color array */
     var COLORS = interpolateColors(dataLength, colorScale, colorRangeInfo);
-
+    console.log(chartData);
     createChart(chartData, COLORS);
 }
 
