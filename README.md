@@ -20,6 +20,7 @@ This project is going moniter time spent on applications and websites to record 
 * [NodeJs](https://nodejs.org/en/)
 * [Mongodb](https://www.mongodb.com/3)
 * [Bootstrap](https://getbootstrap.com/)
+* [chartJS](https://www.chartjs.org/)
 
 ## Versioning
 
