@@ -44,7 +44,7 @@
     
 </head>
 
-<body>
+<body id="dashBody">
 
     {{!-- nav Bar --}}
     <section id="navHeader">
@@ -81,15 +81,29 @@
         <h2>Welcome {{name}}</h2>
         <br>
         <div class="row ">
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <label for="start">Start date:</label>
                 <input type="date" id="start" name="trip-start" value="2021-03-28" min="2018-01-01" max="2018-12-31">
             </div>
         
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <label for="start">End date:</label>
                 <input type="date" id="end" name="trip-End" value="2021-03-28" min="2018-01-01" max="2018-12-31">
             </div>
+            <div class="col-lg-3">
+                <label for="resultsNum">Amount of results:</label>
+                <select name="resultsNum" id="resultsNum">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            {{!-- <div class="col-lg-3">
+                <input type="submit" value="Submit">
+            </div> --}}
+            <br><br>
         </div>
   
     </section>
@@ -103,6 +117,8 @@
             <canvas id="pie"></canvas>
         </div>  
     </div>
+
+    <br><br><br><br><br><br>
     
 
     {{!-- footer --}}

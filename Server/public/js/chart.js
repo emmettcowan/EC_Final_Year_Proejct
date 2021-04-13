@@ -5,6 +5,7 @@ var formateData = [];
 var Today = new Date();
 var startTime = 0;
 var endTime = Today.getTime();
+var startResultsNum = 10;
 //set date inputs max to todays date
 var dd = Today.getDate() + 1;
 var mm = Today.getMonth() + 1; //January is 0!
@@ -43,8 +44,16 @@ endInput.addEventListener('change', (event) => {
         }
     });
     console.log(formateData);
-    Chartdata(formateData);
+    Chartdata(formateData, startResultsNum);
 });
+
+// select number results
+const resultsInput = document.getElementById('resultsNum');
+
+resultsInput.addEventListener('change', (event) => {
+    startResultsNum = event.target.value;
+    Chartdata(formateData, startResultsNum);
+})
 
 
 
@@ -59,7 +68,7 @@ fetch('/userData')
             response.json().then(function (data) {
                 userData = data;
                 formateData = data;
-                Chartdata(formateData);
+                Chartdata(formateData, startResultsNum);
             });
         }
     )
@@ -96,26 +105,38 @@ function interpolateColors(dataLength, colorScale, colorRangeInfo) {
 }
 
 
-function Chartdata(data) {
+function Chartdata(data, resultsNum) {
     var headings = [];
     var values = [];
     data.forEach(entry => {
         if (headings.includes(entry.App)) {
         for (let index = 0; index < headings.length; index++) {
             if (headings[index] == entry.App) {
-                values[index] = values[index] + entry.Total_time;
+                values[index] = values[index] + (entry.Total_time / 60);
             }
         }
     }
     else {
         headings.push(entry.App);
-            values.push(entry.Total_time);
+            values.push(entry.Total_time / 60);
     }
     });
+    
     var chartData = {
         labels: headings,
-        data: values,
+        data: values
     };
+
+    var orderedDataMap = chartData.labels.reduce((acc, heading, index) => {
+        acc[heading] = chartData.data[index];
+        return acc;
+    })
+
+    chartData.labels.sort((a ,b) => orderedDataMap[b] - orderedDataMap[a]);
+    chartData.data.sort((a, b) => b - a);
+
+    chartData.labels = chartData.labels.slice(0, resultsNum);
+    chartData.data = chartData.data.slice(0, resultsNum);
 
     const dataLength = chartData.data.length;
 
@@ -129,7 +150,6 @@ function Chartdata(data) {
 
     /* Create color array */
     var COLORS = interpolateColors(dataLength, colorScale, colorRangeInfo);
-    console.log(chartData);
     createChart(chartData, COLORS);
 }
 
@@ -142,7 +162,7 @@ function createChart( data, colors) {
             labels: data.labels,
             datasets: [
                 {
-                    label: "Time (Seconds)",
+                    label: "Time",
                     backgroundColor: colors,
                     data: data.data
                 }
@@ -152,7 +172,7 @@ function createChart( data, colors) {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Time spent on diffrent applications (Seconds)'
+                text: 'Time spent on diffrent applications'
             },
             scales: {
                 xAxes: [{
@@ -181,7 +201,7 @@ function createChart( data, colors) {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Time spent on diffrent applications (Seconds)'
+                text: 'Time spent on diffrent applications'
             }
         }
     });
