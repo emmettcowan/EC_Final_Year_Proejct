@@ -1,6 +1,7 @@
 
 var userData = [];
 var formateData = [];
+var myChart = null;
 
 var Today = new Date();
 var startTime = 0;
@@ -61,7 +62,7 @@ fetch('/userData')
     .then(
         function (response) {
             if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
+                console.log('Error Status Code: ' +
                     response.status);
                 return;
             }
@@ -73,14 +74,14 @@ fetch('/userData')
         }
     )
     .catch(function (err) {
-        console.log('Fetch Error :-S', err);
+        console.log('api fetch Error :', err);
     });
 
 /*
 *   Code for dynamicly chaning colors is from the following article
 *   https://codenebula.io/javascript/frontend/dataviz/2019/04/18/automatically-generate-chart-colors-with-chart-js-d3s-color-scales/
 *   uses D3 interpolation
-*/
+*/    
 function calculatePoint(i, intervalSize, colorRangeInfo) {
     var { colorStart, colorEnd, useEndAsStart } = colorRangeInfo;
     return (useEndAsStart
@@ -104,6 +105,11 @@ function interpolateColors(dataLength, colorScale, colorRangeInfo) {
     return colorArray;
 }
 
+/*   ^^^^^^^^^
+*   Code for dynamicly chaning colors is from the following article
+*   https://codenebula.io/javascript/frontend/dataviz/2019/04/18/automatically-generate-chart-colors-with-chart-js-d3s-color-scales/
+*   uses D3 interpolation
+*/
 
 function Chartdata(data, resultsNum) {
     var headings = [];
@@ -127,6 +133,13 @@ function Chartdata(data, resultsNum) {
         data: values
     };
 
+    // loop to change all vlaues to be fixed to 2 deicmal places
+    var i = 0;
+    while (i < chartData.data.length) {
+        chartData.data[i] = chartData.data[i].toFixed(2);
+        i++;
+    }
+
     var orderedDataMap = chartData.labels.reduce((acc, heading, index) => {
         acc[heading] = chartData.data[index];
         return acc;
@@ -148,14 +161,16 @@ function Chartdata(data, resultsNum) {
         useEndAsStart: true,
     };
 
-    /* Create color array */
+    // Create color array 
     var COLORS = interpolateColors(dataLength, colorScale, colorRangeInfo);
     createChart(chartData, COLORS);
 }
 
 
 function createChart( data, colors) {
+    
     myChart = document.getElementById("bar").getContext("2d");
+
     myChart = new Chart(myChart, {
         type: 'horizontalBar',
         data: {
@@ -180,7 +195,9 @@ function createChart( data, colors) {
                         beginAtZero: true
                     }
                 }]
-            }
+            },
+            // tooltips: { enabled: false },
+            // hover: { mode: null },
         }
     });
 
