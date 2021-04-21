@@ -31,6 +31,7 @@ This project is going moniter time spent on applications and websites to record 
 * V 0.6  - Basic GUI
 * V 0.7  - server running 
 * V 0.8  - Bootstrap / data graphing
+* V 1    - All Main functionality  
 
 ## Authors
 
