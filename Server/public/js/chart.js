@@ -187,7 +187,7 @@ function createChart( data, colors) {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Time spent on diffrent applications'
+                text: 'Time spent on diffrent applications (mins)'
             },
             scales: {
                 xAxes: [{
@@ -218,7 +218,7 @@ function createChart( data, colors) {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Time spent on diffrent applications'
+                text: 'Time spent on diffrent applications (mins)'
             }
         }
     });
