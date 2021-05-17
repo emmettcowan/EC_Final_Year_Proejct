@@ -23,7 +23,7 @@ user = ""
 thread = None
 
 class detectionThread(Thread):
-    myclient = pymongo.MongoClient("mongodb://localhost:27017/")    # mongodb connection
+    myclient = pymongo.MongoClient('mongodb://localhost:27017/')    # mongodb connection
     active_window = ""
     window = ""
     startTime = time.time()
@@ -110,7 +110,7 @@ def verifiyPass(password, hash, salt):      #  verifiy the inputed password with
 
 def login():            # gui login 
     #connect to the user DB
-    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    myclient = pymongo.MongoClient('mongodb://localhost:27017/')
     mydb = myclient["users"]
     mycol = mydb["userInfo"]
     #set up variables

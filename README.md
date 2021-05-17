@@ -45,4 +45,5 @@ This project is going moniter time spent on applications and websites to record 
 * [python gui threading](https://stackoverflow.com/questions/53794930/starting-and-stopping-a-thread-from-a-gui)
 * [passport js tutorial](https://www.sitepoint.com/local-authentication-using-passport-node-js/)
 * [Python Hash encryption Library](https://docs.python.org/3/library/hashlib.html)
-- [Passport local mongoose](https://www.npmjs.com/package/passport-local-mongoose)
+* [Passport local mongoose](https://www.npmjs.com/package/passport-local-mongoose)
+* [d3 color interpolation for chartjs](https://codenebula.io/javascript/frontend/dataviz/2019/04/18/automatically-generate-chart-colors-with-chart-js-d3s-color-scales/)
